@@ -9,13 +9,17 @@ const input = document.getElementById("searchField");
 //     axios.get(`${surfURL}`)
 // }
 
+//need a way to get take input as beach name, then get coordinates, then pass that to weather api
 const getWeather = () => {
   let location = input.value;
   console.log(location);
   axios
     .get(`${weatherURL}weather?q=${location}&appid=${apiKey}&units=imperial`)
     .then((res) => {
-      console.log(res.data);
+      let name = res.data.name;
+      let temp = Math.floor(res.data.main.temp);
+      let weather = res.data.weather[0].description;
+      console.log(name, temp, weather);
     })
     .catch((err) => {
       console.log("Error: ", err);
